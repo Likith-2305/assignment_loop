@@ -6,7 +6,7 @@ import datetime
 import threading
 
 def generateReport(endTime: datetime, stores: list, timestamp: str, fieldnames: list):
-    for store in stores[:10]:
+    for store in stores:
         timezone = dbOperations.get_timezone(store.store_id).timezone_str
         validFileName = f'report_{timestamp}.csv'
         startTime = endTime - timedelta(weeks=1)
