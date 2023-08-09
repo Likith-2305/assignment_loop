@@ -95,7 +95,7 @@ def db_init():
     dataImported = readFlag()
     if not dataImported:
         with Session(engine) as session:
-            df = pd.read_csv("../data/store_status.csv")
+            df = pd.read_csv("./data/store_status.csv")
             for index, row in df.iterrows():
                 try:
                     timestamp = datetime.strptime(row[2], "%Y-%m-%d %H:%M:%S %Z")
@@ -103,11 +103,11 @@ def db_init():
                     timestamp = datetime.strptime(row[2], "%Y-%m-%d %H:%M:%S.%f %Z")
                 status = StoreStatus(id=index, store_id=row[0], status=row[1], timestamp_utc=timestamp)
                 session.add(status)
-            df = pd.read_csv("../data/menu_hours.csv")
+            df = pd.read_csv("./data/menu_hours.csv")
             for index, row in df.iterrows():
                 timings = MenuHours(id=index, store_id=row[0], day=row[1], start_time_local=row[2], end_time_local=row[3])
                 session.add(timings)
-            df = pd.read_csv("../data/timezones.csv")
+            df = pd.read_csv("./data/timezones.csv")
             for index, row in df.iterrows():
                 timezones = TimeZones(id=index, store_id=row[0], timezone_str=row[1])
                 session.add(timezones)
